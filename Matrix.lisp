@@ -66,23 +66,23 @@
 )
 
 ; TODO: função auxiliar de generateMatrix
-(defun generateElements (matrix value remainingElements)
-    (if (= 0 remainingElements)
-        (matrix)
-        (generateElements (cons value matrix) value (- 1 remainingElements))
+(defun generateElements (value remainingElements)
+    (if (= remainingElements 0)
+        ()
+        (cons value (generateElements value (- remainingElements 1)))
     )
 )
 
 ; TODO: criar matriz de valor único
 (defun generateMatrix (order value)
     (setq remainingElements (expt order 2))
-    (generateElements () value remainingElements)
+    (generateElements value remainingElements)
 )
 
 (defun printMatrixFromRow (matrix row order)
   (write-line (write-to-string (getRow matrix row)))
   (if (= row (- order 1))
-    (write-line (write-to-string (getRow matrix row)))
+    (values)
     (printMatrixFromRow matrix (+ row 1) order)
   )
 )
