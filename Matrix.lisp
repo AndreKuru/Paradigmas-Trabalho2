@@ -3,14 +3,15 @@
     problemáticas pra cada tipo de matriz (INT, Char...)
     em um arquivo específico. |#
 
-; TODO: retornar elemento
+; Retorna o elemento da matriz passada
 (defun getElement (matrix index)
-    (if (= 0 index)
+    (if (= index 0)
         (car matrix)
-        (getElement (cdr matrix) (- 1 index))
+        (getElement (cdr matrix) (- index 1))
     )
 )
 
+; Retorna "order" elementos a partir da posição "begin"
 (defun getRowAux (matrix begin order)
     (setq head (car matrix))
     (if (= begin 0)
@@ -22,7 +23,7 @@
     )
 )
  
-; TODO: retornar linha
+; Retorna a linha da matriz quadrada passada
 (defun getRow (matrix row)
     (setq order (getOrder matrix))
     (getRowAux matrix (* row order) order)
@@ -51,34 +52,29 @@
     )
 )
 
-; TODO: alterar elemento
-(defun setElementWithOrder (matrix index value order)
-    (if (= index 0)
-        (list (value) (cdr matrix))
-        (list (car matrix) (setElementWithOrder (cdr matrix (- index 1) value order)))
-    )
-)
-
-; TODO: alterar elemento
+; Altera o elemento na posição do indíce com o valor informado
 (defun setElement (matrix index value)
-    (setq order getOrder (matrix))
-    (setElementWithOrder matrix index value order)
-)
-
-; TODO: função auxiliar de generateMatrix
-(defun generateElements (value remainingElements)
-    (if (= remainingElements 0)
-        ()
-        (cons value (generateElements value (- remainingElements 1)))
+    (if (= index 0)
+        (cons value (cdr matrix))
+        (cons (car matrix) (setElement (cdr matrix) (- index 1) value))
     )
 )
 
-; TODO: criar matriz de valor único
-(defun generateMatrix (order value)
-    (setq remainingElements (expt order 2))
-    (generateElements value remainingElements)
+; Cria uma matrix de tamanho e valor informado
+(defun generateMatrixAux (value size)
+    (if (= size 0)
+        ()
+        (cons value (generateMatrixAux value (- size 1)))
+    )
 )
 
+; Cria uma matriz com o valor informado
+(defun generateMatrix (order value)
+    (setq size (expt order 2))
+    (generateMatrixAux value size)
+)
+
+; Imprime uma matriz quadrada a partir da linha informada
 (defun printMatrixFromRow (matrix row order)
   (write-line (write-to-string (getRow matrix row)))
   (if (= row (- order 1))
@@ -87,7 +83,7 @@
   )
 )
 
-; TODO: printar matriz
+; Imprime uma matriz quadrada
 (defun printMatrix (matrix)
     (setq order (getOrder matrix))
     (printMatrixFromRow matrix 0 order)

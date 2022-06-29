@@ -16,6 +16,12 @@
     (printMatrix example)
     (setq example2 (generateMatrix 9 0))
     (printMatrix example2)
+
+    (write-line (write-to-string(getElement example 56)))
+    (setq example3 (setElement example 56 66))
+    (write-line (write-to-string(getElement example3 56)))
+    (print (getElement example3 56))
+    (printMatrix example3)
 )
 
 (main)
