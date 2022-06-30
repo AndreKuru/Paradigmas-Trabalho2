@@ -3,6 +3,44 @@
     problemáticas pra cada tipo de matriz (INT, Char...)
     em um arquivo específico. |#
 
+; Retorna a ordem da matriz
+(defun getOrder (matrix)
+    (sqrt (getSize matrix))
+)
+
+; Retorna o tamanho da matriz
+(defun getSize (matrix)
+    (if (null matrix)
+        0
+        (+ 1 (getSize (cdr matrix)))
+    )
+)
+
+; Percorre a matriz filtrando os elementos pelo índice para retornar a região
+(defun getRegionAux (matrix region rows columns initialRow initialColumn order index remaining)
+    (setq row    (floor index order))
+    (setq column (mod   index order))
+    (if (= remaining 0)
+        ()
+        (if (and (<= initialRow    row    (+ initialRow rows -1))
+                 (<= initialColumn column (+ initialColumn columns -1)))
+            (cons (car matrix) 
+            (getRegionAux (cdr matrix) region rows columns initialRow initialColumn order (+ index 1) (- remaining 1))
+            )
+            (getRegionAux (cdr matrix) region rows columns initialRow initialColumn order (+ index 1) remaining)
+        )
+    )
+)
+
+; Retorna a região da matriz quadrada passada
+(defun getRegion (matrix region)
+    (setq order         (getOrder matrix))
+    (setq rows          (ceiling (sqrt order)))             ; Quantidade linhas  por região e quantidade de regiões que compartilham determinada linha
+    (setq columns       (floor (sqrt order)))               ; Quantidade colunas por região e quantidade de regiões que compartilham determinada coluna
+    (setq initialRow    (- region  (mod region rows)))      ; (* rows (floor region rows))
+    (setq initialColumn (* columns (mod region rows)))
+    (getRegionAux matrix region rows columns initialRow initialColumn order 0 order)
+)
 ; Retorna o elemento da matriz passada
 (defun getElement (matrix index)
     (if (= index 0)
@@ -44,24 +82,6 @@
 (defun getColumn (matrix column)
     (setq order (getOrder matrix))
     (getColumnWithOrder matrix column order)
-)
-
-; TODO: retornar região
-(defun getRegion (matrix region)
-    (setq order getOrder (matrix))
-)
-
-; Retorna a ordem da matriz
-(defun getOrder (matrix)
-    (sqrt (getSize matrix))
-)
-
-; Retorna o tamanho da matriz
-(defun getSize (matrix)
-    (if (null matrix)
-        0
-        (+ 1 (getSize (cdr matrix)))
-    )
 )
 
 ; Altera o elemento na posição do indíce com o valor informado
