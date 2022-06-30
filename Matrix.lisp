@@ -29,9 +29,21 @@
     (getRowAux matrix (* row order) order)
 )
 
-; TODO: retornar coluna
+; Retorna a coluna da matriz quadrada passada sem calcular order
+(defun getColumnWithOrder (matrix column order)
+    (if (null matrix)
+        ()
+        (if (= column (mod (car matrix) order))
+            (cons (car matrix) (getColumnWithOrder (cdr matrix) column order))
+            (getColumnWithOrder (cdr matrix) column order)
+        )
+    )
+)
+
+; Retorna a coluna da matriz quadrada passada
 (defun getColumn (matrix column)
-    (setq order getOrder (matrix))
+    (setq order (getOrder matrix))
+    (getColumnWithOrder matrix column order)
 )
 
 ; TODO: retornar região
@@ -39,12 +51,12 @@
     (setq order getOrder (matrix))
 )
 
-; TODO: retornar ordem da matriz
+; Retorna a ordem da matriz
 (defun getOrder (matrix)
     (sqrt (getSize matrix))
 )
 
-; TODO: retornar tamanho da matriz
+; Retorna o tamanho da matriz
 (defun getSize (matrix)
     (if (null matrix)
         0
@@ -72,6 +84,16 @@
 (defun generateMatrix (order value)
     (setq size (expt order 2))
     (generateMatrixAux value size)
+)
+
+(defun printColumn (column)
+    (if (null column)
+        (values)
+        (progn
+            (write-line (write-to-string(car column)))
+            (printColumn (cdr column))
+        )
+    )
 )
 
 ; Imprime uma matriz quadrada a partir da linha informada

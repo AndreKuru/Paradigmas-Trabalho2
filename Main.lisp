@@ -22,6 +22,11 @@
     (write-line (write-to-string(getElement example3 56)))
     (print (getElement example3 56))
     (printMatrix example3)
+    (write-line (write-to-string(getSize example3)))
+    (write-line (write-to-string(getOrder example3)))
+    (write-line "--")
+    (printColumn (getColumn example 2))
+    (write-line "--")
 )
 
 (main)
