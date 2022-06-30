@@ -35,8 +35,8 @@
 ; Retorna a região da matriz quadrada passada
 (defun getRegion (matrix region)
     (setq order         (getOrder matrix))
-    (setq rows          (ceiling (sqrt order)))             ; Quantidade linhas  por região e quantidade de regiões que compartilham determinada linha
-    (setq columns       (floor (sqrt order)))               ; Quantidade colunas por região e quantidade de regiões que compartilham determinada coluna
+    (setq rows          (ceiling (sqrt order)))             ; Quantidade de linhas  por região e quantidade de regiões que compartilham determinada linha
+    (setq columns       (floor (sqrt order)))               ; Quantidade de colunas por região e quantidade de regiões que compartilham determinada coluna
     (setq initialRow    (- region  (mod region rows)))      ; (* rows (floor region rows))
     (setq initialColumn (* columns (mod region rows)))
     (getRegionAux matrix region rows columns initialRow initialColumn order 0 order)
@@ -51,7 +51,6 @@
 
 ; Retorna "order" elementos a partir da posição "begin"
 (defun getRowAux (matrix begin order)
-    (setq head (car matrix))
     (if (= begin 0)
         (if (= order 0)
             ()
@@ -68,12 +67,12 @@
 )
 
 ; Retorna a coluna da matriz quadrada passada sem calcular order
-(defun getColumnWithOrder (matrix column order)
+(defun getColumnAux (matrix column order)
     (if (null matrix)
         ()
         (if (= column (mod (car matrix) order))
-            (cons (car matrix) (getColumnWithOrder (cdr matrix) column order))
-            (getColumnWithOrder (cdr matrix) column order)
+            (cons (car matrix) (getColumnAux (cdr matrix) column order))
+            (getColumnAux (cdr matrix) column order)
         )
     )
 )
@@ -81,7 +80,7 @@
 ; Retorna a coluna da matriz quadrada passada
 (defun getColumn (matrix column)
     (setq order (getOrder matrix))
-    (getColumnWithOrder matrix column order)
+    (getColumnAux matrix column order)
 )
 
 ; Altera o elemento na posição do indíce com o valor informado
@@ -106,6 +105,21 @@
     (generateMatrixAux value size)
 )
 
+(defun printRegionFromRow (region row rows columns)
+    (write-line (write-to-string (getRowAux region (* row columns) columns)))
+    (if (= row (- rows 1))
+        (values)
+        (printRegionFromRow region (+ row 1) rows columns)
+    )
+)
+
+(defun printRegion (region)
+    (setq order (getSize region))
+    (setq rows    (ceiling (sqrt order))) ; Quantidade de linhas  por região
+    (setq columns (floor (sqrt order)))   ; Quantidade de colunas por região
+    (printRegionFromRow region 0 rows columns)
+)
+
 (defun printColumn (column)
     (if (null column)
         (values)
@@ -118,11 +132,11 @@
 
 ; Imprime uma matriz quadrada a partir da linha informada
 (defun printMatrixFromRow (matrix row order)
-  (write-line (write-to-string (getRow matrix row)))
-  (if (= row (- order 1))
-    (values)
-    (printMatrixFromRow matrix (+ row 1) order)
-  )
+    (write-line (write-to-string (getRow matrix row)))
+    (if (= row (- order 1))
+        (values)
+        (printMatrixFromRow matrix (+ row 1) order)
+    )
 )
 
 ; Imprime uma matriz quadrada
