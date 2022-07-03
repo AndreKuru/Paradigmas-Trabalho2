@@ -3,7 +3,7 @@
   (setq order   (getOrderOperatorMatrix operatorMatrix))
   (setq row     (floor index order))
   (setq column  (mod index order))
-  (getElement operatorMatrix (+ (* row 2) column))
+  (getElement operatorMatrix (+ column          (* order row 2)))
 )
 
 ; Retorna o operador a esquerda baseado no índice da matriz de números
@@ -13,7 +13,7 @@
   (setq column  (mod index order))
   (if (= column 0)
     "|"
-    (getElement operatorMatrix (+ (* row 2) (- column 1)))
+    (getElement operatorMatrix (+ (- column 1) (* order row 2)))
   )
 )
 
@@ -24,7 +24,7 @@
   (setq column  (mod index order))
   (if (= row (- order 1))
     "|"
-    (getElement operatorMatrix (+ (* row 2) 1 column))
+    (getElement operatorMatrix (+ column        (* order (+ (* row 2) 1))))
   )
 )
 
@@ -35,7 +35,7 @@
   (setq column  (mod index order))
   (if (= row 0)
     "|"
-    (getElement operatorMatrix (+ (* row 2) 1 column))
+    (getElement operatorMatrix (+ column 1     (* order (- (* row 2) 1))))
   )
 )
 
@@ -46,5 +46,5 @@
 
 ; Retorna a Ordem da matriz de operadores passada
 (defun getOrderOperatorMatrix (operatorMatrix)
-  (* (/ 1 4) (+ 1 (sqrt (+ 1 (* 8 (getSizeMatrix operatorMatrix))))))
+  (* (/ 1 4) (+ 1 (sqrt (+ 1 (* 8 (getSize operatorMatrix))))))
 )

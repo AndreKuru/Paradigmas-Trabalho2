@@ -1,7 +1,7 @@
 (load "./Matrix.lisp")
 (load "./OperatorMatrix.lisp")
 (load "./Validator.lisp")
-(load "./PuzzleSolver.lisp")
+; (load "./PuzzleSolver.lisp")
 
 #| TODO: Inserir entradas para teste e testar as funções conforme for criando. |#
 (defun main()
@@ -24,56 +24,82 @@
                          24 25  26 27  28 29
                          30 31  32 33  34 35))
 
+    (setq operatorMatrix9 (list "<" ">" "|" "<" "<" "|" ">" ">" "|"
+                                "v" "^" "^" "v" "v" "v" "^" "v" "^"
+                                "<" "<" "|" "<" ">" "|" ">" "<" "|"
+                                "^" "^" "^" "^" "v" "v" "v" "v" "v"
+                                "<" "<" "|" "<" ">" "|" ">" "<" "|"
+
+                                "|" "|" "|" "|" "|" "|" "|" "|" "|"
+
+                                ">" ">" "|" ">" "<" "|" "<" ">" "|"
+                                "v" "^" "^" "v" "v" "v" "^" "v" "^"
+                                ">" "<" "|" ">" "<" "|" ">" ">" "|"
+                                "v" "^" "^" "^" "^" "v" "v" "v" "v"
+                                "<" ">" "|" "<" ">" "|" ">" "<" "|"
+
+                                "|" "|" "|" "|" "|" "|" "|" "|" "|"
+
+                                "<" ">" "|" ">" ">" "|" "<" ">" "|"
+                                "v" "v" "v" "^" "v" "v" "^" "^" "^"
+                                ">" "<" "|" ">" "<" "|" "<" "<" "|"
+                                "^" "^" "v" "v" "v" "^" "v" "^" "v"
+                                "<" ">" "|" "<" "<" "|" "<" ">" "|"))
+
     (printMatrix example)
-    (setq example2 (generateMatrix 9 0))
-    (printMatrix example2)
+    (write-line (write-to-string(checkright operatorMatrix9 40)))
+    (write-line (write-to-string(checkleft  operatorMatrix9 40)))
+    (write-line (write-to-string(checkup    operatorMatrix9 40)))
+    (write-line (write-to-string(checkdown  operatorMatrix9 40)))
+    ; (setq example2 (generateMatrix 9 0))
+    ; (printMatrix example2)
 
-    (write-line (write-to-string(getElement example 56)))
-    (setq example3 (setElement example 56 66))
-    (write-line (write-to-string(getElement example3 56)))
-    (print (getElement example3 56))
-    (printMatrix example3)
-    (write-line (write-to-string(getSize example3)))
-    (write-line (write-to-string(getOrder example3)))
-    (write-line "-- Column")
-    (printColumn (getColumn example 2))
+    ; (write-line (write-to-string(getElement example 56)))
+    ; (setq example3 (setElement example 56 66))
+    ; (write-line (write-to-string(getElement example3 56)))
+    ; (print (getElement example3 56))
+    ; (printMatrix example3)
+    ; (write-line (write-to-string(getSize example3)))
+    ; (write-line (write-to-string(getOrder example3)))
+    ; (write-line "-- Column")
+    ; (printColumn (getColumn example 2))
 
-    (write-line "-- Example 9x9")
-    (write-line "-- Region 0")
-    (printRegion (getRegion example 0))
-    (write-line "-- Region 1")
-    (printRegion (getRegion example 1))
-    (write-line "-- Region 2")
-    (printRegion (getRegion example 2))
-    (write-line "-- Region 3")
-    (printRegion (getRegion example 3))
-    (write-line "-- Region 4")
-    (printRegion (getRegion example 4))
-    (write-line "-- Region 5")
-    (printRegion (getRegion example 5))
-    (write-line "-- Region 6")
-    (printRegion (getRegion example 6))
-    (write-line "-- Region 7")
-    (printRegion (getRegion example 7))
-    (write-line "-- Region 8")
-    (printRegion (getRegion example 8))
+    ; (write-line "-- Example 9x9")
+    ; (write-line "-- Region 0")
+    ; (printRegion (getRegion example 0))
+    ; (write-line "-- Region 1")
+    ; (printRegion (getRegion example 1))
+    ; (write-line "-- Region 2")
+    ; (printRegion (getRegion example 2))
+    ; (write-line "-- Region 3")
+    ; (printRegion (getRegion example 3))
+    ; (write-line "-- Region 4")
+    ; (printRegion (getRegion example 4))
+    ; (write-line "-- Region 5")
+    ; (printRegion (getRegion example 5))
+    ; (write-line "-- Region 6")
+    ; (printRegion (getRegion example 6))
+    ; (write-line "-- Region 7")
+    ; (printRegion (getRegion example 7))
+    ; (write-line "-- Region 8")
+    ; (printRegion (getRegion example 8))
 
 
-    (write-line "-- Example 6x6")
-    (printMatrix example6)
+    ; (write-line "-- Example 6x6")
+    ; (printMatrix example6)
 
-    (write-line "-- Region 0")
-    (printRegion (getRegion example6 0))
-    (write-line "-- Region 1")     
-    (printRegion (getRegion example6 1))
-    (write-line "-- Region 2")     
-    (printRegion (getRegion example6 2))
-    (write-line "-- Region 3")     
-    (printRegion (getRegion example6 3))
-    (write-line "-- Region 4")     
-    (printRegion (getRegion example6 4))
-    (write-line "-- Region 5")     
-    (printRegion (getRegion example6 5))
+    ; (write-line "-- Region 0")
+    ; (printRegion (getRegion example6 0))
+    ; (write-line "-- Region 1")     
+    ; (printRegion (getRegion example6 1))
+    ; (write-line "-- Region 2")     
+    ; (printRegion (getRegion example6 2))
+    ; (write-line "-- Region 3")     
+    ; (printRegion (getRegion example6 3))
+    ; (write-line "-- Region 4")     
+    ; (printRegion (getRegion example6 4))
+    ; (write-line "-- Region 5")     
+    ; (printRegion (getRegion example6 5))
 )
 
 (main)
