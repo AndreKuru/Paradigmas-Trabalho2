@@ -1,7 +1,7 @@
 (load "./Matrix.lisp")
 (load "./OperatorMatrix.lisp")
 (load "./Validator.lisp")
-; (load "./PuzzleSolver.lisp")
+(load "./PuzzleSolver.lisp")
 
 #| TODO: Inserir entradas para teste e testar as funções conforme for criando. |#
 (defun main()
@@ -23,6 +23,11 @@
                          18 19  20 21  22 23
                          24 25  26 27  28 29
                          30 31  32 33  34 35))
+
+    (setq example4 (list 1 2 3 4
+                         2 0 0 0
+                         0 0 0 0
+                         0 0 0 0))
 
     (setq operatorMatrix9 (list "<" ">" "|" "<" "<" "|" ">" ">" "|"
                                 "v" "^" "^" "v" "v" "v" "^" "v" "^"
@@ -46,11 +51,47 @@
                                 "^" "^" "v" "v" "v" "^" "v" "^" "v"
                                 "<" ">" "|" "<" "<" "|" "<" ">" "|"))
 
-    (printMatrix example)
-    (write-line (write-to-string(checkright operatorMatrix9 40)))
-    (write-line (write-to-string(checkleft  operatorMatrix9 40)))
-    (write-line (write-to-string(checkup    operatorMatrix9 40)))
-    (write-line (write-to-string(checkdown  operatorMatrix9 40)))
+    (setq operatorMatrix4 (list "<" "|" "<" "|"
+                                "v" "^" "^" "v"
+                                "<" "|" ">" "|"
+
+                                "|" "|" "|" "|"
+                                
+                                ">" "|" "<" "|"
+                                "v" "^" "^" "v"
+                                ">" "|" ">" "|"))
+
+    ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 5)))
+    ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 3)))
+    ; (write-line (write-to-string (validateArray '(1 0 0 0))))
+    ; (write-line (write-to-string (validateArray '(1 2 2 4))))
+    ; (write-line (write-to-string (validateRow example6 02)))
+    ; (write-line (write-to-string (validateRow example6 14)))
+    ; (write-line (write-to-string (validateColumn example6 01)))
+    ; (write-line (write-to-string (validateColumn example6 04)))
+    ; (write-line (write-to-string (validateOperation "<" 2 3)))
+    ; (write-line (write-to-string (validateOperation ">" 4 6)))
+    ;(write-line (write-to-string (validateOperation "v" 1 2)))
+    ; (write-line (write-to-string (validateOperation "|" 1 5)))
+    ; (write-line (write-to-string (validateRight example operatorMatrix9 0)))
+    ; (write-line (write-to-string (validateLeft example operatorMatrix9 01)))
+    ; (write-line (write-to-string (validateDown example operatorMatrix9 01)))
+    ; (write-line (write-to-string (validateUp example operatorMatrix9 10)))
+    ; (write-line (write-to-string (validateAdjacents example operatorMatrix9 10)))
+    ; (write-line (write-to-string (validateRight example operatorMatrix9 10)))
+    ; (write-line (write-to-string (validateLeft example operatorMatrix9 10)))
+    ; (write-line (write-to-string (validateDown example operatorMatrix9 10)))
+    ; (write-line (write-to-string (validateUp example4 operatorMatrix4 4)))
+    ; (write-line (write-to-string (validateElement example operatorMatrix9 10)))
+    (write-line (write-to-string (solveMatrix operatorMatrix4)))
+    ; (write-line (write-to-string (getElement (list (- 1)) 0 )))
+
+
+    ; (printMatrix example)
+    ; (write-line (write-to-string(checkright operatorMatrix9 40)))
+    ; (write-line (write-to-string(checkleft  operatorMatrix9 40)))
+    ; (write-line (write-to-string(checkup    operatorMatrix9 40)))
+    ; (write-line (write-to-string(checkdown  operatorMatrix9 40)))
     ; (setq example2 (generateMatrix 9 0))
     ; (printMatrix example2)
 
@@ -69,7 +110,7 @@
     ; (printRegion (getRegion example 0))
     ; (write-line "-- Region 1")
     ; (printRegion (getRegion example 1))
-    ; (write-line "-- Region 2")
+     ;(write-line "-- Region 2")
     ; (printRegion (getRegion example 2))
     ; (write-line "-- Region 3")
     ; (printRegion (getRegion example 3))

@@ -35,7 +35,7 @@
   (setq column  (mod index order))
   (if (= row 0)
     "|"
-    (getElement operatorMatrix (+ column 1     (* order (- (* row 2) 1))))
+    (getElement operatorMatrix (+ column     (* order (- (* row 2) 1))))
   )
 )
 

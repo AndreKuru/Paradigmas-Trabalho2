@@ -40,14 +40,14 @@
 #| TODO: validar coerência entre dois elementos
          (sempre considerando da esquerda para
          a direita ou de cima para baixo) |#
-(defun validateOperation (element1 element2 operator)
-   (if (or (= element1 0) (= element2 0) (eq operator "|"))
+(defun validateOperation (operator element1 element2)
+   (if (or (string= operator "|") (= element1 0) (= element2 0))
       T
       (cond
-         ((eq operator ">") (> element1 element2))
-         ((eq operator "<") (< element1 element2))
-         ((eq operator "v") (> element1 element2))
-         ((eq operator "^") (< element1 element2))
+         ((string= operator ">") (> element1 element2))
+         ((string= operator "<") (< element1 element2))
+         ((string= operator "v") (> element1 element2))
+         ((string= operator "^") (< element1 element2))
       )
    )
 )
@@ -57,8 +57,8 @@
    (setq order   (getOrder numberMatrix))
    (setq column  (mod index order))
    (or (= column order) (validateOperation 
-      (getElement numberMatrix index)
       (checkright operatorMatrix index)
+      (getElement numberMatrix index)      
       (getElement numberMatrix (+ index 1)))
    )
 )
@@ -68,9 +68,9 @@
    (setq order  (getOrder numberMatrix))
    (setq column (mod index order))
    (or (= column 0) (validateOperation
-      (getElement numberMatrix index)
       (checkleft operatorMatrix index)
-      (getElement numberMatrix (- index 1)))
+      (getElement numberMatrix (- index 1))
+      (getElement numberMatrix index))
    )
 )
 
@@ -79,8 +79,8 @@
    (setq order (getOrder numberMatrix))
    (setq row   (floor index order))
    (or (= row (- order 1)) (validateOperation
+      (checkdown operatorMatrix index)
       (getElement numberMatrix index)
-      (checkleft operatorMatrix index)
       (getElement numberMatrix (+ index order)))
    )
 )
@@ -90,9 +90,9 @@
    (setq order (getOrder numberMatrix))
    (setq row   (floor index order))
    (or (= row 0) (validateOperation
-      (getElement numberMatrix index)
-      (checkleft operatorMatrix index)
-      (getElement numberMatrix (- index order)))
+      (checkup operatorMatrix index)
+      (getElement numberMatrix (- index order))
+      (getElement numberMatrix index))
    )
 )
 
@@ -109,8 +109,8 @@
 ; TODO: validar coerência de um elemento no puzzle
 (defun validateElement (numberMatrix operatorMatrix index)
    (and
-      (validateRow numberMatrix operatorMatrix index)
-      (validateColumn numberMatrix operatorMatrix index)
+      (validateRow numberMatrix index)
+      (validateColumn numberMatrix index)
       (validateAdjacents numberMatrix operatorMatrix index)
    )
 )
