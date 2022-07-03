@@ -105,6 +105,7 @@
     (generateMatrixAux value size)
 )
 
+; Imprime uma região a partir da linha informada
 (defun printRegionFromRow (region row rows columns)
     (write-line (write-to-string (getRowAux region (* row columns) columns)))
     (if (= row (- rows 1))
@@ -113,6 +114,7 @@
     )
 )
 
+; Imprime uma região isolada de uma matriz quadrada
 (defun printRegion (region)
     (setq order (getSize region))
     (setq rows    (ceiling (sqrt order))) ; Quantidade de linhas  por região
@@ -120,6 +122,7 @@
     (printRegionFromRow region 0 rows columns)
 )
 
+; Imprime um vetor verticalmente
 (defun printColumn (column)
     (if (null column)
         (values)

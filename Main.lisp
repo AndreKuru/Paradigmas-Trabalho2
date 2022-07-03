@@ -1,4 +1,7 @@
 (load "./Matrix.lisp")
+(load "./OperatorMatrix.lisp")
+(load "./Validator.lisp")
+(load "./PuzzleSolver.lisp")
 
 #| TODO: Inserir entradas para teste e testar as funções conforme for criando. |#
 (defun main()

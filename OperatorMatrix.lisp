@@ -48,23 +48,3 @@
 (defun getOrderOperatorMatrix (operatorMatrix)
   (* (/ 1 4) (+ 1 (sqrt (+ 1 (* 8 (getSizeMatrix operatorMatrix))))))
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-n = order * order * 1 - order
-n = 1*order**2  - order
-order =  0/4(sqrt(8n + 1) + 1)
