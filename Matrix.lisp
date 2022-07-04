@@ -67,12 +67,12 @@
 )
 
 ; Retorna a coluna da matriz quadrada passada sem calcular order
-(defun getColumnAux (matrix column order)
+(defun getColumnAux (matrix column order index)
     (if (null matrix)
         ()
-        (if (= column (mod (car matrix) order))
-            (cons (car matrix) (getColumnAux (cdr matrix) column order))
-            (getColumnAux (cdr matrix) column order)
+        (if (= column (mod index order))
+            (cons (car matrix) (getColumnAux (cdr matrix) column order (+ index 1)))
+            (getColumnAux (cdr matrix) column order (+ index 1))
         )
     )
 )
@@ -80,7 +80,7 @@
 ; Retorna a coluna da matriz quadrada passada
 (defun getColumn (matrix column)
     (setq order (getOrder matrix))
-    (getColumnAux matrix column order)
+    (getColumnAux matrix column order 0)
 )
 
 ; Altera o elemento na posição do indíce com o valor informado

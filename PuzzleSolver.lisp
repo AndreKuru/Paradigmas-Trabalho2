@@ -8,7 +8,7 @@
             (setq try (setElement numberMatrix index value))            ; Prepara uma matriz de tentativa
             (if (validateElement try operatorMatrix index)              ; Testa a tentativa
                 try                                                         ; Se funcionar devolve a atual tentativa
-                (operatorMatrix numberMatrix order (+ value 1) index)         ; Se não faz uma nova tentativa
+                (solveElement operatorMatrix numberMatrix order (+ value 1) index)         ; Se não faz uma nova tentativa
             )
         )
     )
@@ -17,62 +17,31 @@
 ; Tenta todos os valores possíveis na Matriz de números passada a partir do indíce informado
 ; (serão tentados todos os valores nos indíces seguintes e no atual será tentado valores a partir do valor informado)
 (defun solveMatrixAux (operatorMatrix numberMatrix order value index)
-    (if (>= index (* index index))                                                              ; Checa se toda a matriz de números foi preenchida
-        numberMatrix                                                                                ; Se sim retorna a resposta
-        (progn                                                                                      ; Se não
-            (setq try (solveElement operatorMatrix numberMatrix order value index))                     ; Procura uma tentativa válida para o índice atual
-            (if (/= (list (- 1)) try)                                                                           ; Checa se não se esgotaram as tentativas do indíce atual
-                (if (/= (list (- 2)) try)                                                                           ; Checa se não se esgotaram as tentativas do indíce seguinte
-                    (solveMatrixAux operatorMatrix try order 1                              (+ index 1))        ; Tudo certo até então, tenta com o indíce seguinte
-                    (solveMatrixAux operatorMatrix try order (+ (getElement try index) 1)   index)              ; Não dá pra seguir assim, tenta outros valores no indíce atual
+    (if (>= index (* order order))                                                    ; Checa se toda a matriz de números foi preenchida
+        numberMatrix                                                                      ; Se sim retorna a resposta
+        (progn                                                                            ; Se não
+            (let ((try (solveElement operatorMatrix numberMatrix order value index)))              ; Procura uma tentativa válida para o índice atual
+                (setq tryError (getElement try 0))
+                (setq error1   (- 1))
+
+                (if (/= error1 tryError)                              ; Checa se não se esgotaram as tentativas do indíce atual
+                    (progn 
+                        (setq nextTry (solveMatrixAux operatorMatrix try order 1 (+ index 1))) ; Procura uma tentativa válida para o índice atual
+                        (setq nextTryError (getElement nextTry 0))
+                        (setq error2       (- 2))
+                        (setq lastValue (getElement try index))
+
+                        (if (/= error2 nextTryError)                             ; Checa se não se esgotaram as tentativas do indíce seguinte
+                            nextTry                                                                             ; Tudo certo até então, tenta com o indíce seguinte
+                            (solveMatrixAux operatorMatrix try order (+ lastValue 1) index)                  ; Não dá pra seguir assim, tenta outros valores no indíce atual    
+                        )
+                    )
+                    (list (- 2))                                                                               ; Erro2: Acabaram as tentativas nível 2
                 )
-                (list (- 2))                                                                               ; Erro2: Acabaram as tentativas nível 2
             )
         )
     )
 )
-
-#|(defun solveElement (operatorMatrix numberMatrix order value index)
-    (if (> value order)
-        (progn
-            (write-line "Max value reached")
-            '(- 1)
-        )
-        (progn
-            (setq attempt (setElement numberMatrix index value))            ; Prepara uma matriz de tentativa
-            (if (validateElement attempt operatorMatrix index)              ; Testa a tentativa
-                attempt                                                         ; Se funcionar devolve a atual tentativa
-                (solveElement operatorMatrix numberMatrix order (+ value 1) index)         ; Se não faz uma nova tentativa
-            )
-        )
-    )
-)
-
-(defun solveMatrixAux (operatorMatrix numberMatrix order value index)
-    (if (>= index (* order order))
-        numbermatrix
-        (setq attempt (solveElement operatorMatrix numberMatrix order value index))
-    )
-    (if (typep attempt 'number)
-        (progn
-            (setq lastvalue (getElement numberMatrix (- index 1)))
-            (if (= lastvalue order)
-                (progn
-                    (write-line "Value reseted")
-                    (setq value 1)
-                    (write-line (write-to-string value))
-                )
-                (setq value (+ lastvalue 1))    
-            )
-            (solveMatrixAux operatorMatrix numberMatrix order value (- index 1))
-        )
-        (progn
-            (write-line (write-to-string index))
-            (printMatrix attempt)
-            (solveMatrixAux operatorMatrix attempt order 1 (+ index 1)) ; Tudo certo até então, tenta com o indíce seguinte
-        )
-    )
-)|#
 
 ; Encontra uma matriz solução (de números) para uma matriz de operadores informada
 (defun solveMatrix (operatorMatrix)

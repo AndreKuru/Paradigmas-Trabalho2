@@ -60,6 +60,35 @@
                                 ">" "|" "<" "|"
                                 "v" "^" "^" "v"
                                 ">" "|" ">" "|"))
+    
+    (setq operatorMatrix6 (list "<" "|" ">" "|" ">" "|"
+                                "^" "v" "^" "^" "^" "v"
+                                ">" "|" ">" "|" ">" "|"
+                                "v" "v" "v" "^" "^" "^"
+                                "<" "|" "<" "|" "<" "|"
+                                "|" "|" "|" "|" "|" "|"
+                                "<" "|" "<" "|" "<" "|"
+                                "^" "^" "v" "v" "^" "v"
+                                ">" "|" "<" "|" "<" "|"
+                                "v" "v" "^" "^" "^" "v"
+                                ">" "|" "<" "|" ">" "|"))
+
+    (setq matrixI5 (list 2 3 1 4
+                         1 4 0 0
+                         0 0 0 0
+                         0 0 0 0))
+
+    ; (write-line (write-to-string (validateRow matrixI5 5)))
+    ; (write-line (write-to-string (validateColumn matrixI5 5)))
+
+    ; (write-line (write-to-string (validateAdjacents matrixI5 operatorMatrix4 5)))
+
+    ; (write-line (write-to-string (validateElement matrixI5 operatorMatrix4 5)))
+
+    ; (write-line (write-to-string (solveElement operatorMatrix4 matrixI5 4 1 5)))
+    (printMatrix (solveMatrix operatorMatrix4))
+    (printMatrix (solveMatrix operatorMatrix6))
+    (printMatrix (solveMatrix operatorMatrix9))
 
     ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 5)))
     ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 3)))
@@ -83,7 +112,6 @@
     ; (write-line (write-to-string (validateDown example operatorMatrix9 10)))
     ; (write-line (write-to-string (validateUp example4 operatorMatrix4 4)))
     ; (write-line (write-to-string (validateElement example operatorMatrix9 10)))
-    (write-line (write-to-string (solveMatrix operatorMatrix4)))
     ; (write-line (write-to-string (getElement (list (- 1)) 0 )))
 
 
