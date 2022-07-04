@@ -1,12 +1,4 @@
-(load "./Matrix.lisp")
-(load "./OperatorMatrix.lisp")
-
-#| TODO: Criar funções equivalentes aos validates do
-   arquivo Backtracker do T1. Não criar validatetry
-   e nem solve a principio. 
-   TODO: Criar validador da região algebricamente.|#
-
-; TODO: validar se o número passado não está no array
+; Validar se o número passado não está no array
 (defun validateArrayWithX (array value)
    (if (= (getSize array) 0)
       T
@@ -14,7 +6,7 @@
    )
 )
 
-; TODO: validar linha/coluna passada
+; Validar linha/coluna passada
 (defun validateArray (array)
    (if (= (getSize array) 0)
       T
@@ -23,21 +15,21 @@
    )
 )
 
-; TODO: checar se linha tem elementos repetidos
+; Checar se linha tem elementos repetidos
 (defun validateRow (numberMatrix index)
    (setq order    (getOrder numberMatrix))
    (setq row      (floor index order))
    (validateArray (getRow numberMatrix row))
 )
 
-; TODO: checar se coluna tem elementos repetidos
+; Checar se coluna tem elementos repetidos
 (defun validateColumn (numberMatrix index)
    (setq order    (getOrder numberMatrix))
    (setq column   (mod index order))
    (validateArray (getColumn numberMatrix column))
 )
 
-#| TODO: validar coerência entre dois elementos
+#| Validar coerência entre dois elementos
          (sempre considerando da esquerda para
          a direita ou de cima para baixo) |#
 (defun validateOperation (operator element1 element2)
@@ -52,7 +44,7 @@
    )
 )
 
-; TODO: validar a coerência entre o elemento passado e aquele à sua direita
+; Validar a coerência entre o elemento passado e aquele à sua direita
 (defun validateRight (numberMatrix operatorMatrix index)
    (setq order   (getOrder numberMatrix))
    (setq column  (mod index order))
@@ -63,7 +55,7 @@
    )
 )
 
-; TODO: validar a coerência entre o elemento passado e aquele à sua esquerda
+; Validar a coerência entre o elemento passado e aquele à sua esquerda
 (defun validateLeft (numberMatrix operatorMatrix index)
    (setq order  (getOrder numberMatrix))
    (setq column (mod index order))
@@ -74,7 +66,7 @@
    )
 )
 
-; TODO: validar a coerência entre o elemento passado e aquele embaixo
+; Validar a coerência entre o elemento passado e aquele embaixo
 (defun validateDown (numberMatrix operatorMatrix index)
    (setq order (getOrder numberMatrix))
    (setq row   (floor index order))
@@ -85,7 +77,7 @@
    )
 )
 
-; TODO: validar a coerência entre o elemento passado e aquele acima
+; Validar a coerência entre o elemento passado e aquele acima
 (defun validateUp (numberMatrix operatorMatrix index)
    (setq order (getOrder numberMatrix))
    (setq row   (floor index order))
@@ -96,7 +88,7 @@
    )
 )
 
-; TODO: validar a coerência entre o elemento passado e todos seus adjacentes
+; Validar a coerência entre o elemento passado e todos seus adjacentes
 (defun validateAdjacents (numberMatrix operatorMatrix index)
    (and
       (validateRight numberMatrix operatorMatrix index)
@@ -106,7 +98,7 @@
    )
 )
 
-; TODO: validar coerência de um elemento no puzzle
+; Validar coerência de um elemento no puzzle
 (defun validateElement (numberMatrix operatorMatrix index)
    (and
       (validateRow numberMatrix index)

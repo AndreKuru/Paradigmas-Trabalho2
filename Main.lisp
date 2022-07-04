@@ -3,7 +3,6 @@
 (load "./Validator.lisp")
 (load "./PuzzleSolver.lisp")
 
-#| TODO: Inserir entradas para teste e testar as funções conforme for criando. |#
 (defun main()
     (setq example  (list 00 01 02  03 04 05  06 07 08
                          09 10 11  12 13 14  15 16 17
@@ -51,16 +50,6 @@
                                 "^" "^" "v" "v" "v" "^" "v" "^" "v"
                                 "<" ">" "|" "<" "<" "|" "<" ">" "|"))
 
-    (setq operatorMatrix4 (list "<" "|" "<" "|"
-                                "v" "^" "^" "v"
-                                "<" "|" ">" "|"
-
-                                "|" "|" "|" "|"
-                                
-                                ">" "|" "<" "|"
-                                "v" "^" "^" "v"
-                                ">" "|" ">" "|"))
-    
     (setq operatorMatrix6 (list "<" "|" ">" "|" ">" "|"
                                 "^" "v" "^" "^" "^" "v"
                                 ">" "|" ">" "|" ">" "|"
@@ -73,10 +62,24 @@
                                 "v" "v" "^" "^" "^" "v"
                                 ">" "|" "<" "|" ">" "|"))
 
+    (setq operatorMatrix4 (list "<" "|" "<" "|"
+                                "v" "^" "^" "v"
+                                "<" "|" ">" "|"
+
+                                "|" "|" "|" "|"
+                                
+                                ">" "|" "<" "|"
+                                "v" "^" "^" "v"
+                                ">" "|" ">" "|"))
+    
     (setq matrixI5 (list 2 3 1 4
                          1 4 0 0
                          0 0 0 0
                          0 0 0 0))
+
+    (printMatrix (solveMatrix operatorMatrix4))
+    (printMatrix (solveMatrix operatorMatrix6))
+    (printMatrix (solveMatrix operatorMatrix9))
 
     ; (write-line (write-to-string (validateRow matrixI5 5)))
     ; (write-line (write-to-string (validateColumn matrixI5 5)))
@@ -86,10 +89,6 @@
     ; (write-line (write-to-string (validateElement matrixI5 operatorMatrix4 5)))
 
     ; (write-line (write-to-string (solveElement operatorMatrix4 matrixI5 4 1 5)))
-    (printMatrix (solveMatrix operatorMatrix4))
-    (printMatrix (solveMatrix operatorMatrix6))
-    (printMatrix (solveMatrix operatorMatrix9))
-
     ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 5)))
     ; (write-line (write-to-string (validateArrayWithX '(1 2 3 4) 3)))
     ; (write-line (write-to-string (validateArray '(1 0 0 0))))

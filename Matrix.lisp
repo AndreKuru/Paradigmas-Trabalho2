@@ -1,8 +1,3 @@
-#| TODO: Funções genéricas para manipular as matrizes,
-    caso esbarremos em algum problema criar as funções
-    problemáticas pra cada tipo de matriz (INT, Char...)
-    em um arquivo específico. |#
-
 ; Retorna a ordem da matriz
 (defun getOrder (matrix)
     (sqrt (getSize matrix))
@@ -147,6 +142,3 @@
     (setq order (getOrder matrix))
     (printMatrixFromRow matrix 0 order)
 )
-
-#| TODO: Funções para retornar os elementos de dada região
-e retornar região de um dado elemento |#
